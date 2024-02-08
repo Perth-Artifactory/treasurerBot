@@ -27,6 +27,9 @@ if config["debug"]:
     debug_slack_id = "UC6T4U150"
     debug_tidyhq_id = 1952718
     config["slack"]["admin_channel"] = "C05HB2Z82CT"
+    logging.info("Debug mode enabled. Using debug IDs.")
+else:
+    logging.info("Debug mode disabled. Using live IDs.")
 
 app = App(token=config["slack"]["bot_token"])
 
@@ -222,7 +225,7 @@ def tidyhq_remind_button(ack, body, logger):
         # Send notification to admin channel that member has been reminded
         app.client.chat_postMessage(  # type: ignore
             channel=config["slack"]["admin_channel"],
-            text=f"{name} has been reminded to pay their <https://artifactory.tidyhq.com/contacts/{tidyhq_id}/finances|invoices> by <@{body['user']['id']}> via email.",
+            text=f"<https://artifactory.tidyhq.com/contacts/{tidyhq_id}|{name}> has been reminded to pay their <https://artifactory.tidyhq.com/contacts/{tidyhq_id}/finances|invoices> by <@{body['user']['id']}> via email.",
         )
 
         # Add a note to each invoice in TidyHQ that a reminder has been sent
