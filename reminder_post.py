@@ -108,7 +108,7 @@ for contact in contacts:
                 f"${invoice['amount']} - <https://artifactory.tidyhq.com/finances/invoices/{invoice['id']}|{invoice['name']}> (Due {(datetime.now() - invoice['due_date']).days} days ago)"
             )
 
-        text = f"{contact_info['display_name']} owes ${total_owed} across {len(overdue_invoices)} invoices"
+        text = f"{contact_info['display_name']} owes ${total_owed} across {len(overdue_invoices)} {'invoice' if len(overdue_invoices) == 1 else 'invoices'}"
 
         # Add text block
         block_list.append(copy(blocks.text))
