@@ -1,0 +1,4 @@
+config.json
+*.pyc
+invoice.json
+invoices.json
